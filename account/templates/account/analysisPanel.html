@@ -1,0 +1,286 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+    .fire_font{
+        font-family: 'Roboto', sans-serif;
+    }
+    .anton_font{
+        font-family: 'Anton', sans-serif;
+    }
+    text {
+        font-family: "RamaGothicM-Heavy",Impact,Haettenschweiler,"Franklin Gothic Bold",Charcoal,"Helvetica Inserat","Bitstream Vera Sans Bold","Arial Black",sans-serif;
+        font-size: 4rem;
+        font-weight: 400;
+        line-height: 16rem;
+        fill: #1072b8;
+      }
+      
+      #donut {
+        width: 19rem;
+        height: 19rem;
+        margin: 0 auto;
+      }
+      
+      path.color0 {
+        fill: #1072b8;
+      }
+      
+      path.color1 {
+        fill: #35526b;
+      }
+</style>
+
+{% if user.is_superuser %}   
+
+
+<div class="flex justify-center items-center my-24 mx-12 bg-gray-200 py-12 rounded-lg">
+    <div class="text-center fire_font font-bold text-5xl">
+        <h1>Total Submit</h1>
+        <h1 class="bg-green-500 text-white rounded-full">{{ tsc }}</h1>
+    </div>
+</div>
+
+
+<div class="flex justify-center px-8">
+    <div>
+        <div id="donut" data-donut="{{Rb6p}}">
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="https://d3js.org/d3.v3.min.js"></script>
+    </div>
+    <div style="width: 190px; height: 190px" class="flex items-center justify-center bg-gray-900 rounded-lg p-4">
+        <img src="https://img.icons8.com/flat_round/64/000000/arrow-left.png"/>
+        <h1 class="font-bold anton_font text-2xl text-center text-white">Below 60%</h1>
+    </div>
+</div>
+
+
+<style>
+    :root {
+        --a: 360deg;
+        --b: 360deg;
+        --c: 360deg;
+        --d: 360deg;
+        --e: 360deg;
+        --f: 360deg;
+        --candy: #FF7FAA;
+        --sky: #CCE6FF;
+        --velvet: #593380;
+        --mandarin: #FF8833;
+        --lemon: #FFEC1A;
+        --claret: #990F3D;
+        --oxford: #0F5499;
+        --teal: #0D7680;
+        --jade: #00994D;
+      }
+      
+      .app {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        grid-gap: 1rem;
+        place-content: center;
+        height: 75vh;
+        padding: 1rem;
+        background: #111;
+      }
+      
+      .pie {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+                align-items: center;
+        margin: 0;
+        color: #ccc;
+      }
+      @supports (background-image: conic-gradient(deeppink, hotpink)) {
+        .pie::before {
+          --wh: 100px;
+          -webkit-box-flex: 0;
+                  flex: 0 0 var(--wh);
+          content: "";
+          width: var(--wh);
+          height: var(--wh);
+          border-radius: var(--wh);
+          background-image: conic-gradient(var(--candy) 0 var(--a), var(--lemon) 0 var(--b), var(--teal) 0 var(--c), var(--mandarin) 0 var(--d), var(--claret) 0 var(--e), var(--oxford) 0 var(--f), var(--velvet) 0 var(--f));
+        }
+      }
+      .pie dl {
+        display: grid;
+        grid-template-columns: -webkit-min-content 1fr;
+        grid-template-columns: min-content 1fr;
+        grid-gap: 0 0.25rem;
+        margin: 0 0 0 1rem;
+      }
+      .pie dd, .pie dt {
+        padding: 1rem 0;
+      }
+      .pie dt {
+        display: -webkit-box;
+        display: flex;
+      }
+      .pie dt::before {
+        content: "";
+        display: block;
+        width: 0.5rem;
+        margin-right: 0.5rem;
+        background-color: var(--bg);
+      }
+      .pie dt:nth-of-type(1) {
+        --bg: var(--candy) ;
+      }
+      .pie dt:nth-of-type(2) {
+        --bg: var(--lemon) ;
+      }
+      .pie dt:nth-of-type(3) {
+        --bg: var(--teal) ;
+      }
+      .pie dt:nth-of-type(4) {
+        --bg: var(--mandarin) ;
+      }
+      .pie dt:nth-of-type(5) {
+        --bg: var(--claret) ;
+      }
+      .pie dt:nth-of-type(6) {
+        --bg: var(--oxford) ;
+      }
+      .pie dt:nth-of-type(7) {
+        --bg: var(--velvet) ;
+      }
+      .pie dd {
+        text-align: right;
+      }
+      
+</style>
+<div class="app ">
+    <div class="flex justify-center">
+        <div class="pie px-8">
+            <dl>
+                <dt>below_60 Percent</dt>  <dd class="text-red-700 font-bold">{{Rb6p}}%</dd>
+                <dt>Above_60 Percent</dt>  <dd class="text-red-700 font-bold">{{Bb6p}}%</dd>
+            </dl>
+        </div>
+        <div class="pie px-8">
+            <dl>
+                {% for key,items in Temp_dict.items  %}
+                <dt>{{key}}</dt>  <dd class="text-red-700 font-bold">{{items}}</dd>
+                {% endfor %}
+            </dl>
+        </div>
+    </div>
+</div>
+<script>
+    function makeSegments(pie) {
+        const segments = pie.querySelectorAll("dt");
+        const values = pie.querySelectorAll("dd");
+        const letters = ["a", "b", "c", "d", "e", "f"];
+      
+        let total = 0;
+        values.forEach(dd => {
+          total += parseFloat(dd.textContent);
+        });
+      
+        let index = 0;
+        let degree = 0;
+        let stops = "";
+        for (const segment of segments) {
+          const value = parseFloat(segment.nextElementSibling.textContent);
+          const letter = letters[index++];
+          degree = Math.round((value / total) * 360) + degree;    
+          stops += `--${letter}: ${degree}deg;`
+        }
+        
+        pie.setAttribute("style", stops);
+      }
+      
+      document.querySelectorAll(".pie").forEach(makeSegments);
+      
+</script>
+
+
+
+
+
+<script>
+    var duration   = 500,
+    transition = 200;
+
+drawDonutChart(
+  '#donut',
+  $('#donut').data('donut'),
+  190,
+  190,
+  ".35em"
+);
+
+function drawDonutChart(element, percent, width, height, text_y) {
+  width = typeof width !== 'undefined' ? width : 190;
+  height = typeof height !== 'undefined' ? height : 190;
+  text_y = typeof text_y !== 'undefined' ? text_y : "-.10em";
+
+  var dataset = {
+        lower: calcPercent(0),
+        upper: calcPercent(percent)
+      },
+      radius = Math.min(width, height) / 2,
+      pie = d3.layout.pie().sort(null),
+      format = d3.format(".0%");
+
+  var arc = d3.svg.arc()
+        .innerRadius(radius - 20)
+        .outerRadius(radius);
+
+  var svg = d3.select(element).append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+  var path = svg.selectAll("path")
+        .data(pie(dataset.lower))
+        .enter().append("path")
+        .attr("class", function(d, i) { return "color" + i })
+        .attr("d", arc)
+        .each(function(d) { this._current = d; }); // store the initial values
+
+  var text = svg.append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", text_y);
+
+  if (typeof(percent) === "string") {
+    text.text(percent);
+  }
+  else {
+    var progress = 0;
+    var timeout = setTimeout(function () {
+      clearTimeout(timeout);
+      path = path.data(pie(dataset.upper)); // update the data
+      path.transition().duration(duration).attrTween("d", function (a) {
+        // Store the displayed angles in _current.
+        // Then, interpolate from _current to the new angles.
+        // During the transition, _current is updated in-place by d3.interpolate.
+        var i  = d3.interpolate(this._current, a);
+        var i2 = d3.interpolate(progress, percent)
+        this._current = i(0);
+        return function(t) {
+          text.text( format(i2(t) / 100) );
+          return arc(i(t));
+        };
+      }); // redraw the arcs
+    }, 200);
+  }
+};
+
+function calcPercent(percent) {
+  return [percent, 100-percent];
+};
+</script>
+{% else %}
+
+<img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="" srcset="">
+
+{% endif %} 
+
+{% endblock %}

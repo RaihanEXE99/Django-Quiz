@@ -1,0 +1,168 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<link href='https://fonts.googleapis.com/css?family=Kanit' rel='stylesheet' type='text/css'>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+<meta name="viewport" content="width=device-width, initial-scale=.8">
+<style>
+    body {
+        background: radial-gradient(ellipse farthest-corner at bottom right, #ececec, #efefef);
+      }
+      
+      ul, li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .card {
+        position: relative;
+        margin: 0 auto;
+        top: calc(40% - (500px / 2));
+        height: 500px;
+        width: 300px;
+      }
+      .card .card-top {
+        background: #ffd300;
+        height: 300px;
+        overflow: hidden;
+      }
+      .card .card-top .icons {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+                flex-flow: row;
+        justify-content: space-around;
+      }
+      .card .card-top .icons div {
+        position: relative;
+        width: 50%;
+        color: white;
+      }
+      .card .card-top .icons div:first-of-type {
+        text-align: left;
+        padding: 1em 0 0 1em;
+      }
+      .card .card-top .icons div:last-of-type {
+        text-align: right;
+        padding: 1em 1em 0 0;
+      }
+      .card .card-top .circle {
+        position: relative;
+        background: white;
+        border-radius: 50%;
+        left: 27.5%;
+        top: calc((300px / 100) * 20);
+        z-index: 100;
+        width: 136.3636363636px;
+        height: 136.3636363636px;
+        box-shadow: 2px 2px 0px 0px #dbb500 , 2px 2.7px 0px 0px #dcb600 , 3px 4.05px 0px 0px #ddb700 , 4px 5.4px 0px 0px #ddb700 , 5px 6.75px 0px 0px #deb800 , 6px 8.1px 0px 0px #deb800 , 7px 9.45px 0px 0px #dfb800 , 8px 10.8px 0px 0px #dfb900 , 9px 12.15px 0px 0px #e0b900 , 10px 13.5px 0px 0px #e0ba00 , 11px 14.85px 0px 0px #e1ba00 , 12px 16.2px 0px 0px #e1bb00 , 13px 17.55px 0px 0px #e2bb00 , 14px 18.9px 0px 0px #e2bb00 , 15px 20.25px 0px 0px #e3bc00 , 16px 21.6px 0px 0px #e3bc00 , 17px 22.95px 0px 0px #e4bd00 , 18px 24.3px 0px 0px #e4bd00 , 19px 25.65px 0px 0px #e5bd00 , 20px 27px 0px 0px #e6be00 , 21px 28.35px 0px 0px #e6be00 , 22px 29.7px 0px 0px #e7bf00 , 23px 31.05px 0px 0px #e7bf00 , 24px 32.4px 0px 0px #e8c000 , 25px 33.75px 0px 0px #e8c000 , 26px 35.1px 0px 0px #e9c000 , 27px 36.45px 0px 0px #e9c100 , 28px 37.8px 0px 0px #eac100 , 29px 39.15px 0px 0px #eac200 , 30px 40.5px 0px 0px #ebc200 , 31px 41.85px 0px 0px #ebc300 , 32px 43.2px 0px 0px #ecc300 , 33px 44.55px 0px 0px #ecc300 , 34px 45.9px 0px 0px #edc400 , 35px 47.25px 0px 0px #edc400 , 36px 48.6px 0px 0px #eec500 , 37px 49.95px 0px 0px #eec500 , 38px 51.3px 0px 0px #efc500 , 39px 52.65px 0px 0px #efc600 , 40px 54px 0px 0px #f0c600 , 41px 55.35px 0px 0px #f0c700 , 42px 56.7px 0px 0px #f1c700 , 43px 58.05px 0px 0px #f1c800 , 44px 59.4px 0px 0px #f2c800 , 45px 60.75px 0px 0px #f2c800 , 46px 62.1px 0px 0px #f3c900 , 47px 63.45px 0px 0px #f3c900 , 48px 64.8px 0px 0px #f4ca00 , 49px 66.15px 0px 0px #f4ca00 , 50px 67.5px 0px 0px #f5cb00 , 51px 68.85px 0px 0px #f5cb00 , 52px 70.2px 0px 0px #f6cb00 , 53px 71.55px 0px 0px #f6cc00 , 54px 72.9px 0px 0px #f7cc00 , 55px 74.25px 0px 0px #f7cd00 , 56px 75.6px 0px 0px #f8cd00 , 57px 76.95px 0px 0px #f8ce00 , 58px 78.3px 0px 0px #f9ce00 , 59px 79.65px 0px 0px #f9ce00 , 60px 81px 0px 0px #facf00 , 61px 82.35px 0px 0px #facf00 , 62px 83.7px 0px 0px #fbd000 , 63px 85.05px 0px 0px #fbd000 , 64px 86.4px 0px 0px #fcd000 , 65px 87.75px 0px 0px #fcd100 , 66px 89.1px 0px 0px #fdd100 , 67px 90.45px 0px 0px #fdd200 , 68px 91.8px 0px 0px #fed200 , 69px 93.15px 0px 0px #fed300 , 70px 94.5px 0px 0px #ffd300 , 71px 95.85px 0px 0px #ffd301 , 72px 97.2px 0px 0px #ffd301 , 73px 98.55px 0px 0px #ffd302 , 74px 99.9px 0px 0px #ffd302 , 75px 101.25px 0px 0px #ffd303 , 76px 102.6px 0px 0px #ffd403 , 77px 103.95px 0px 0px #ffd404 , 78px 105.3px 0px 0px #ffd404 , 79px 106.65px 0px 0px #ffd405 , 80px 108px 0px 0px #ffd405 , 81px 109.35px 0px 0px #ffd406 , 82px 110.7px 0px 0px #ffd406 , 83px 112.05px 0px 0px #ffd407 , 84px 113.4px 0px 0px #ffd407 , 85px 114.75px 0px 0px #ffd408 , 86px 116.1px 0px 0px #ffd408 , 87px 117.45px 0px 0px #ffd409 , 88px 118.8px 0px 0px #ffd509 , 89px 120.15px 0px 0px #ffd50a , 90px 121.5px 0px 0px #ffd50a , 91px 122.85px 0px 0px #ffd50b , 92px 124.2px 0px 0px #ffd50b , 93px 125.55px 0px 0px #ffd50c , 94px 126.9px 0px 0px #ffd50c , 95px 128.25px 0px 0px #ffd50d , 96px 129.6px 0px 0px #ffd50d , 97px 130.95px 0px 0px #ffd50e , 98px 132.3px 0px 0px #ffd50e , 99px 133.65px 0px 0px #ffd60f , 100px 135px 0px 0px #ffd60f , 101px 136.35px 0px 0px #ffd610 , 102px 137.7px 0px 0px #ffd610 , 103px 139.05px 0px 0px #ffd611 , 104px 140.4px 0px 0px #ffd611 , 105px 141.75px 0px 0px #ffd612 , 106px 143.1px 0px 0px #ffd612 , 107px 144.45px 0px 0px #ffd613 , 108px 145.8px 0px 0px #ffd613 , 109px 147.15px 0px 0px #ffd614 , 110px 148.5px 0px 0px #ffd714 , 111px 149.85px 0px 0px #ffd715 , 112px 151.2px 0px 0px #ffd715 , 113px 152.55px 0px 0px #ffd716 , 114px 153.9px 0px 0px #ffd716 , 115px 155.25px 0px 0px #ffd717 , 116px 156.6px 0px 0px #ffd717 , 117px 157.95px 0px 0px #ffd718 , 118px 159.3px 0px 0px #ffd718 , 119px 160.65px 0px 0px #ffd719 , 120px 162px 0px 0px #ffd71a , 121px 163.35px 0px 0px #ffd71a , 122px 164.7px 0px 0px #ffd81b , 123px 166.05px 0px 0px #ffd81b , 124px 167.4px 0px 0px #ffd81c , 125px 168.75px 0px 0px #ffd81c , 126px 170.1px 0px 0px #ffd81d , 127px 171.45px 0px 0px #ffd81d , 128px 172.8px 0px 0px #ffd81e , 129px 174.15px 0px 0px #ffd81e , 130px 175.5px 0px 0px #ffd81f , 131px 176.85px 0px 0px #ffd81f , 132px 178.2px 0px 0px #ffd820 , 133px 179.55px 0px 0px #ffd920 , 134px 180.9px 0px 0px #ffd921 , 135px 182.25px 0px 0px #ffd921 , 136px 183.6px 0px 0px #ffd922 , 137px 184.95px 0px 0px #ffd922 , 138px 186.3px 0px 0px #ffd923 , 139px 187.65px 0px 0px #ffd923 , 140px 189px 0px 0px #ffd924 , 141px 190.35px 0px 0px #ffd924 , 142px 191.7px 0px 0px #ffd925 , 143px 193.05px 0px 0px #ffd925 , 144px 194.4px 0px 0px #ffda26 , 145px 195.75px 0px 0px #ffda26 , 146px 197.1px 0px 0px #ffda27 , 147px 198.45px 0px 0px #ffda27 , 148px 199.8px 0px 0px #ffda28 , 149px 201.15px 0px 0px #ffda28 , 150px 202.5px 0px 0px #ffda29;
+      }
+      .card .card-top .circle:before {
+        content: '';
+        z-index: -100;
+        margin-left: -20%;
+        margin-top: -20%;
+        width: calc(136.3636363636px * 1.4);
+        height: calc(136.3636363636px * 1.4);
+        border: calc((500px / 100) * 3) solid white;
+        border-top: calc((500px / 100) * 3) solid transparent;
+        -webkit-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+        border-radius: 50%;
+        position: absolute;
+        opacity: 0.9;
+      }
+      .card .card-top .circle p {
+        font-family: 'Kanit';
+        text-align: center;
+        position: relative;
+        line-height: calc(136.3636363636px / 2);
+      }
+      .card .card-top .circle p:first-of-type {
+        font-size: calc(136.3636363636px / 4);
+        top: 20%;
+        color: #666;
+      }
+      .card .card-top .circle p:last-of-type {
+        font-size: calc(136.3636363636px / 12);
+        text-transform: uppercase;
+        top: -15%;
+        color: #999;
+      }
+      .card .card-bottom {
+        height: 200px;
+        background: white;
+      }
+      .card .card-bottom ul {
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+                flex-flow: row wrap;
+        height: 100%;
+        width: 80%;
+        margin: 0 auto;
+        color: #666666;
+      }
+      .card .card-bottom ul li {
+        width: 50%;
+        text-align: center;
+        align-self: center;
+        font-size: calc(136.3636363636px / 4);
+      }
+      .card .card-bottom ul li p {
+        font-size: calc(136.3636363636px / 12);
+      }
+      
+      .border-radius-top, .border-radius {
+        border-top-right-radius: 10px;
+        border-top-left-radius: 10px;
+      }
+      
+      .border-radius-bottom, .border-radius {
+        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 10px;
+      }
+      
+</style>
+<div class="card border-radius">
+    <div class="card-top border-radius-top">
+      <!-- <div class="icons">
+        <div><i class="fa fa-bars"></i></div>
+        <div><i class="fa fa-search"></i></div>
+      </div> -->
+      <div class="circle">
+        <p>{{that_submit.percentage}}%</p>
+        <p>Your Score</p>
+      </div>
+    </div>
+    <div class="card-bottom border-radius-bottom">
+      <ul>
+        <li><i class="fa fa-check-circle-o"></i>
+          <p>Correct : {{that_submit.correct}}/{{that_submit.total}}</p>
+        </li>
+        <li><i class="fa fa-times"></i>
+          <p>Wrong : {{that_submit.wrong}}/{{that_submit.total}}</p>
+        </li>
+        <li><i class="fa fa-question-circle"></i>
+          <p>Total {{that_submit.total}} Question</p>
+        </li>
+        <li>
+          <div>
+            <a href="{% url 'Quiz:certificate' verification=that_submit.urlH %}" target="_blank">
+              <i class="fa fa-cloud-download"></i>
+              <p>Download Certificate</p>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <div class="flex justify-center px-auto my-4">
+        <p style="text-align: center;font-size:10px" class="font-bold text-gray-600">{{that_submit.urlhash}}</p>
+      </div>
+    </div>
+  </div>
+  
+
+{% endblock %}

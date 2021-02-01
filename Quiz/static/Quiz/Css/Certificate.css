@@ -1,0 +1,99 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+img {
+    pointer-events: none;
+}
+
+#Certificate {
+    position: absolute;
+    width: 1056px;
+    height: 816px;
+    background-color: rgba(255,255,255,1);
+    overflow: hidden;
+
+}
+#Red_Diploma_Certificate__3_ {
+    position: absolute;
+    width: 1056px;
+    height: 816px;
+    left: 0px;
+    top: 0px;
+    overflow: visible;
+}
+
+#Raihan_Chowdhury {
+    position: absolute;
+    left: 332px;
+    top: 278px;
+    overflow: visible;
+    width: 393px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 45px;
+    color: rgba(112,112,112,1);
+}
+#Raihan_Chowdhury_j {
+    position: absolute;
+    left: 369px;
+    top: 608px;
+    overflow: visible;
+    width: 251px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Rage;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(112,112,112,1);
+}
+#Sadman_sakib_Jisan {
+    position: absolute;
+    left: 681px;
+    top: 608px;
+    overflow: visible;
+    width: 257px;
+    white-space: nowrap;
+    text-align: left;
+    font-family: Rage;
+    font-style: italic;
+    font-weight: normal;
+    font-size: 35px;
+    color: rgba(112,112,112,1);
+}
+#Congratulation__You_have_obtai {
+    position: absolute;
+    left: 335px;
+    top: 351px;
+    overflow: visible;
+    width: 498px;
+    white-space: nowrap;
+    line-height: 43px;
+    margin-top: -6px;
+    text-align: left;
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 31px;
+    color: rgba(128,103,83,1);
+    letter-spacing: 0.38px;
+}
+/* #cBut{
+    position:absolute;
+    top: 820px;
+} */
+
+

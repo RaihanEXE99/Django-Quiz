@@ -1,0 +1,80 @@
+{% load static %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script src="https://superal.github.io/canvas2image/canvas2image.js"></script>
+<link rel="stylesheet" href="{% static 'Quiz/Css/Certificate.css' %}">
+
+
+
+<!-- <div class="Download" style="width: 1056px; height: 816px;" > -->
+<div class="Download" style="width: 1056px; height:816px;">
+		<div id="Certificate" >
+			<img id="Red_Diploma_Certificate__3_" src="{% static 'Quiz/Images/Red_Diploma_Certificate__3_.png' %}">
+			<div id="">
+				<span></span>
+			</div>
+			<div id="Raihan_Chowdhury">
+				<span>{{that_submit.me.full_name}}</span>
+			</div>
+			<div id="Raihan_Chowdhury_j">
+				<span>Raihan Chowdhury</span>
+			</div>
+			<div id="Sadman_sakib_Jisan">
+				<span>Sadman sakib Jisan</span>
+			</div>
+			<div id="Congratulation__You_have_obtai">
+				<span>Congratulation, You have<br/>obtained {{that_submit.percentage}}% marks in this Quiz.</span><br>
+			</div>
+		</div>
+</div>
+<div class="cent">
+	<button id="cBut" type="button" >
+		<!-- <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/></svg> -->
+		Download
+	</button>
+</div>
+
+<script>
+	document.getElementById('cBut').addEventListener('click', function() {
+		html2canvas(document.querySelector('.Download'), {
+			onrendered: function(canvas) {
+				// document.body.appendChild(canvas);
+			  return Canvas2Image.saveAsPNG(canvas);
+			}
+		});
+		
+	});
+</script>
+<style>
+	.cent{
+		display: flex;
+		justify-content:center;
+	}
+	button {
+		display: inline-block;
+		font-size: 1.15em;
+		position: relative;
+		text-align: center;
+		padding: 0.5em 1em;
+		background: linear-gradient(45deg, #59adeb, #40c3af);
+		color: #fff;
+		box-shadow: 0 0.2em 0.2em rgba(0,0,0,0.25);
+		border-radius: 0.2em;
+		transition: box-shadow 0.2s ease-in-out;
+		cursor: pointer;
+	  }
+	  button:hover {
+		box-shadow: 0 0.1em 0.25em rgba(0,0,0,0.25);
+	  }
+</style>
+
+
+
+
+
+
+<script src="{% static 'Quiz/js/Certificate.js' %}"></script>
+
+
+
+
+	

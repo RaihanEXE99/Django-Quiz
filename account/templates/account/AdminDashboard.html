@@ -1,0 +1,61 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+    .fire_font{
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+{% if user.is_superuser %}    
+<div class="flex justify-center w-full ">
+    <div>
+        <div class="my-6">
+            <h1 class="font-bold text-gray-900 text-6xl">All Submissions</h1>
+        </div>
+        {% for x in submissions %}
+        <div>
+            <div class="flex shadow-2xl  px-20 py-4 my-8 rounded-lg fire_font bg-gray-900 text-white">
+                <div>
+                    <div class="flex items-center">
+                        <h1>EmployeId : {{x.me.employeId}}</h1>
+                    </div>
+                    <div class="">
+                        <h1>Full Name : {{x.me.full_name}}</h1>
+                        <h1>Submission Date : {{x.timeStamp}}</h1>
+
+                        <h1>Total Correct : {{x.correct}}/{{x.total}}</h1>
+                    </div>
+                    <div class=" ">
+                        <h1 class="text-sm">UUID : {{x.urlhash}}</h1>
+                        <h1 class="text-sm ">ID:<span class="px-2 mx-2 bg-red-700 rounded-lg">{{x.urlH}}</span></h1>
+                    </div>
+                    <div class="bg-white text-black p-2">
+                        <h1 class="text-sm ">Answer Sheet </h1>
+                        {% for ix in x.answer %}
+                            <span class="text-sm ">{{forloop.counter}}<span class="text-white px-2 bg-blue-700 rounded-lg text-black">{{ix}}</span>,</span> 
+                        {% endfor %}
+                    </div>
+                    <div class="flex justify-center mt-8">
+                        <a href="{% url 'Quiz:Score' verification=x.urlH %}">
+                            <button class="bg-red-700 hover:bg-red-500 text-white font-bold py-2 px-4 rounded">
+                                More Details
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+
+<img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="" srcset="">
+
+{% endif %}    
+
+
+
+{% endblock %}

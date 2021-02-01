@@ -1,0 +1,221 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<style>
+
+</style>
+<div onclick="Startfunc()" id="start" class="flex justify-center">
+    <button style="position:absolute; top:50vh" class="text-6xl bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg">
+      Start Now
+    </button>
+</div>
+<form action="{% url 'Quiz:Submission' that_quiz_id=that_quiz.id %}" method="POST">
+{% csrf_token %}
+    {% for x in questions %}
+<div id="Hid{{x.no}}" class="flex justify-center my-32 " style="display: none; ">
+    <div class=" max-w-lg bg-white shadow-lg rounded-lg overflow-hidden my-10" style="min-width: 50vw;">
+        <div class="px-4 py-8">
+            <div class="flex justify-center">
+                <h1 class="text-gray-400 font-bold text-3xl uppercase">{{x.no}}/{{count}}</h1>
+            </div>
+            <h1 class="text-gray-900 font-bold text-3xl uppercase">{{x.question}}</h1>
+            <div class="flex items-center">
+                <div class="mt-4">
+                    <div class="mt-2">
+                    <label class="ml-6">
+                        <input type="radio" class="form-radio" name="{{x.no}}" value="A">
+                        <span class="ml-2">{{x.A}}</span>
+                    </label>
+                    </div>
+                    <div class="mt-2">
+                        <label class="ml-6">
+                            <input type="radio" class="form-radio" name="{{x.no}}" value="B">
+                            <span class="ml-2">{{x.B}}</span>
+                        </label>
+                    </div>
+                    <div class="mt-2">
+                        <label class="ml-6">
+                            <input type="radio" class="form-radio" name="{{x.no}}" value="C">
+                            <span class="ml-2">{{x.C}}</span>
+                        </label>
+                    </div>
+                    <div class="mt-2">
+                        <label class="ml-6">
+                            <input type="radio" class="form-radio" name="{{x.no}}" value="D">
+                            <span class="ml-2">{{x.D}}</span>
+                        </label>
+                    </div>
+                    <div class="mt-2">
+                        <label class="ml-6">
+                            <input type="radio" class="form-radio " name="{{x.no}}" value="E" checked>
+                            <span class="ml-2 text-green-400 ">Pass</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center py-8">
+            <div id="back">
+                <img onclick="changeBack()"  class="outline-none hover:opacity-75 m-8"  src="{% static 'Quiz/Images/b.png' %}">
+            </div>
+            {% if x.no != count %}
+            <div id="next" >
+                <img onclick="changeNext()"  class="outline-none hover:opacity-75 m-8" src="{% static 'Quiz/Images/f.png' %}">
+            </div>
+            {% endif %}
+
+            {% if x.no == count %}
+                <button class="my-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-4 rounded-r">
+                  Submit
+                </button>
+            {% endif %}
+            
+        </div>
+    </div>
+</div>
+{% endfor %}
+</form>
+
+<script>
+    var counter = 0;
+    function Startfunc(){
+        counter += 1;
+        var x = document.getElementById("Hid1");
+        x.style.display = "flex";
+        var y = document.getElementById("start");
+        y.style.display = "none";
+        checkB(counter)
+    }
+
+    function changeNext(){
+        old = counter
+        oldDiv = "Hid" + old
+        counter += 1;
+        divId = "Hid" + String(counter)
+        var x = document.getElementById(divId);
+        var y = document.getElementById(oldDiv);
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+        } else {
+            x.style.display = "none";
+        }
+        if (y.style.display === "none") {
+        y.style.display = "flex";
+        } else {
+        y.style.display = "none";
+        }
+        console.log(old,counter,counter+1)
+        checkB(counter)
+        
+    }
+    function changeBack(){
+        old = counter
+        oldDiv = "Hid" + old
+        counter -= 1;
+        divId = "Hid" + String(counter)
+
+        var x = document.getElementById(divId);
+        var y = document.getElementById(oldDiv);
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+          } else {
+            x.style.display = "none";
+          }
+        if (y.style.display === "none") {
+        y.style.display = "flex";
+        } else {
+        y.style.display = "none";
+        }
+        checkB(counter)
+    }
+
+
+
+    function checkB(counter){
+        if (counter == 1){
+            var a = document.getElementById("back");
+            a.style.display = "none"
+        }
+        else if (counter != 1){
+            var a = document.getElementById("back");
+            a.style.display = "flex";
+        }
+    }
+</script>
+
+{% endblock %}
+
+/*
+counter = 1;
+    function Startfunc(){
+        var x = document.getElementById("Hid1");
+        if (x.style.display == "none") {
+            x.style.display = "flex";
+          } else {
+            x.style.display = "none";
+          }
+        var y = document.getElementById("start");
+        y.style.display = "none";
+        check(counter)
+        checkN(counter)
+    }
+
+    function changeNext(){
+            old = counter
+            oldDiv = "Hid" + old
+            counter += 1;
+            divId = "Hid" + String(counter)
+            var x = document.getElementById(divId);
+            var y = document.getElementById(oldDiv);
+            if (x.style.display === "none") {
+                x.style.display = "flex";
+            } else {
+                x.style.display = "none";
+            }
+            if (y.style.display === "none") {
+            y.style.display = "flex";
+            } else {
+            y.style.display = "none";
+            }
+            console.log(old,counter,counter+1)
+
+            check(counter)
+            checkN(counter)
+    }
+
+    function changeBack(){
+        old = counter
+        oldDiv = "Hid" + old
+        counter -= 1;
+        divId = "Hid" + String(counter)
+
+        var x = document.getElementById(divId);
+        var y = document.getElementById(oldDiv);
+        if (x.style.display === "none") {
+            x.style.display = "flex";
+          } else {
+            x.style.display = "none";
+          }
+        if (y.style.display === "none") {
+        y.style.display = "flex";
+        } else {
+        y.style.display = "none";
+        }
+        check(counter)
+        checkN(counter)
+    }
+
+    function checkB(counter){
+        if (counter == 1){
+            let back = document.getElementById("back");
+            back.style.display = "none";
+        }
+    }
+    function checkN(counter){
+        if (counter != 4){
+            let nextQ = document.getElementById("nextQ");
+            nextQ.style.display = "flex";
+        }
+    }
+        
+*/

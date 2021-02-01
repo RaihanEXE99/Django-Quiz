@@ -1,0 +1,53 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=.5">
+
+
+
+{% for x in slide %}
+<div class="flex justify-center my-32 ">
+    <div class="w-11/12 max-w-6xl bg-white shadow-2xl rounded-lg overflow-hidden my-10 py-4 px-8" style="min-width: 50vw;">
+        <div class="px-4 py-8">
+            <div class="flex justify-center">
+                <h1 class="text-gray-900 font-bold text-3xl uppercase">{{x.title}}</h1>
+            </div>   
+        </div>
+        {% if x.image %}
+            <div class="flex justify-center">
+                
+                <img src="{{x.image.url}}" alt="" style="width: 100% !important; height:auto !important;">
+            </div>
+        {% endif %}
+            <div class="my-12">
+                <p class=" text-gray-600 text-xl mt-1 ">{{x.description}}</p>
+            </div>
+        <div class="flex justify-center py-8">  
+            {% if x.no != 1 %}
+                <div id="back">
+                    <a href="{% url 'Quiz:slide' that_slide_no=prev %}">
+                        <img  class="outline-none hover:opacity-75 m-8"  src="{% static 'Quiz/Images/b.png' %}">
+                    </a>
+                </div>
+            {% endif %}
+            {% if x.no != count %}
+                <div id="next" >
+                    <a href="{% url 'Quiz:slide' that_slide_no=next %}">
+                        <img  class="outline-none hover:opacity-75 m-8" src="{% static 'Quiz/Images/f.png' %}">
+                    </a>
+                </div>
+            {% endif %}
+    
+            {% if x.no == count %}
+            <a href="{% url 'Quiz:question' that_quiz_id=that_quiz.id %}">
+                <button  class="my-4 py-4 bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold px-4 rounded-r">
+                    Start Quiz
+                </button>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,123 @@
+{% extends 'Quiz/base.html' %}
+{% block body%}
+{% load static %}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,500&display=swap" rel="stylesheet">
+<style>
+    .fire_font{
+        font-family: 'Roboto', sans-serif;
+    }
+</style>
+
+<meta name="viewport" content="width=device-width, initial-scale=.5">
+
+{% if user.is_superuser %}    
+
+
+<div class="flex justify-center">
+    <div class="w-full max-w-xl py-12">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{% url 'account:adminPanel' %}" method="POST">
+          {% csrf_token %}
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+              Quiz Title
+            </label>
+            <input name="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" type="text" placeholder="Your Quiz Title">
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+              Description
+            </label>
+            <textarea name="description" rows="7" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="Description" type="text" placeholder="Quiz Description"></textarea>
+          </div>
+          <div class="flex items-center justify-center">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+</div>
+
+<div class="flex justify-center bg-gray-900 mx-24 rounded-lg">
+    <div class="w-full max-w-xl py-12">
+        <div class="flex justify-center shadow-2xl py-4 my-4 bg-white">
+            <h1 class="text-red-500 font-bold text-center">Warning! Please maintain Serial No(No/Numbers) when you add or delete Slides and Questions</h1>
+        </div>
+        <div class="flex justify-center py-4">
+          <a href="/admin/Quiz/slide/">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                Add / Delete Slides
+            </button>
+          </a>
+        </div>
+      </div>
+</div>
+
+
+<div class="flex justify-center bg-gray-900 mx-24 rounded-lg my-8">
+  <div class="w-full max-w-xl py-12">
+      <div class="flex justify-center shadow-2xl py-4 my-4 bg-white">
+          <h1 class="text-red-500 font-bold text-center">Warning! Please maintain Serial No(No/Numbers) when you add or delete Slides and Questions</h1>
+      </div>
+
+      <div class="flex justify-center shadow-2xl py-4 my-4 bg-white">
+        <h1 class="text-red-500 font-bold text-center">Example:</h1>
+      </div>
+      <div class="flex justify-center shadow-2xl py-4 my-4 bg-white">
+        <img src="{% static 'Quiz/Images/example.png' %}">
+      </div>
+    
+      
+      <div class="flex justify-center py-4">
+        <a href="/admin/Quiz/tquestion/">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+            Add / Delete Questions
+          </button>
+        </a>
+      </div>
+    </div>
+</div>
+
+<div class="flex justify-center bg-gray-900 mx-24 rounded-lg">
+  <div class="w-full max-w-xl py-12">
+      <div class="flex justify-center shadow-2xl py-4 my-4 bg-white">
+          <h1 class="text-red-500 font-bold text-center">Add or Customize your branch/department names !</h1>
+      </div>
+      <div class="flex justify-center py-4">
+        <a href="/admin/Quiz/department_or_branch/">
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+              Add Branch/Department
+          </button>
+        </a>
+      </div>
+    </div>
+</div>
+
+<div class="flex justify-center bg-purple-900 mx-24 rounded-lg my-8">
+    <div class="w-full max-w-xl py-12">
+        <div class="flex justify-center shadow-2xl py-4 my-4 bg-white rounded-lg">
+            <div>
+                <h1 class="text-red-500 font-bold text-center">Manage all accounts. Warning! </h1>
+                <h1 class="text-red-500 font-bold text-center"> Don't try to change the password from here. Because of Hash format (Security purpose).If you change from here You will never get back that password. The id will be disabled forever. Use Change Password option to change password</h1>
+            </div>
+        </div>
+        <div class="flex justify-center py-4">
+            <a href="/admin/account/account/">
+                <button class="bg-red-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                    Accounts
+                </button>
+            </a>
+        </div>
+      </div>
+</div>
+
+
+
+
+{% else %}
+
+<img src="https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=967&q=80" alt="" srcset="">
+
+{% endif %} 
+
+{% endblock %}
